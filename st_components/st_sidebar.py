@@ -26,7 +26,7 @@ def st_sidebar():
             conversation_navigation()
             
             # Section dedicated to About Us
-            about_us()
+            #about_us()
 
 
     # except Exception as e:
