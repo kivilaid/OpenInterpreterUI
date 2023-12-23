@@ -1,5 +1,20 @@
 import streamlit as st
 
+def home_page():
+    st.title('Welcome to TravelSafe Insurance!')
+    st.markdown("""
+        ## Protect Your Travel, Embrace Adventure
+        TravelSafe Insurance provides you with peace of mind, so you can enjoy your journey without worries. 
+        Whether you're traveling solo or with loved ones, we've got you covered.
+
+        - **Comprehensive Coverage:** From flight cancellations to medical emergencies, we've got your back.
+        - **Flexible Plans:** Tailor your insurance to match your travel needs.
+        - **24/7 Support:** Our dedicated team is here to assist you, anytime, anywhere.
+
+        Embark on your next adventure with confidence. Get your travel insurance quote today!
+    """)
+    st.image("public/oi-web.png", caption='Travel with peace of mind.')
+
 def calculate_insurance(age, bmi, smoking_status):
     base_price = 100
     age_factor = 3 * age
@@ -9,7 +24,14 @@ def calculate_insurance(age, bmi, smoking_status):
     return insurance_cost
 
 def main():
-    st.title('Insurance Cost Calculator')
+    st.sidebar.title("Navigation")
+    menu = ["Home", "Insurance Cost Calculator"]
+    choice = st.sidebar.radio("Menu", menu, index=1)
+
+    if choice == "Home":
+        home_page()
+    elif choice == "Insurance Cost Calculator":
+        st.title('Insurance Cost Calculator')
 
     with st.form("insurance_form"):
         cols = st.columns(2)
