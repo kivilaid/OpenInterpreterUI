@@ -173,3 +173,5 @@ cython_debug/
 
 .vscode
 .aider*
+workspace/Travel.py
+workspace/log.txt
