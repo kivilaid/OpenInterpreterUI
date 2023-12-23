@@ -1,10 +1,6 @@
-
 import streamlit as st
-import random
-
 
 def main():
-    st.sidebar.title('Menu')
     menu_options = ['Home', 'Gallery', 'Contact', 'Travel insurance']
     menu_choice = st.sidebar.selectbox('Choose a page:', menu_options)
 
@@ -27,17 +23,6 @@ if menu_choice == 'Travel insurance':
         destination = st.text_input('Destination')
         duration = st.number_input('Duration of Travel (days)', min_value=1, max_value=365, step=1)
         submit_button = st.form_submit_button('Calculate')
-        if submit_button:
-            st.write('Calculation would be performed here.')
-    if menu_choice == 'Gallery':
-        # Create a 3x3 grid for image placeholders
-        for i in range(3):
-            cols = st.columns(3)
-            for col in cols:
-                # Randomly select an image of a huge car
-                random_car_image = random.choice(car_images)
-                col.image(random_car_image, caption='Huge Car')
-
 
 if __name__ == '__main__':
     main()
