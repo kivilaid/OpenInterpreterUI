@@ -8,8 +8,7 @@ def extract_text_from_pdf(pdf_path):
     pdf = PdfReader(pdf_path)
     text = ''
     for page in pdf.pages:
-        text += page.extract_text() + '
-'
+        text += page.extract_text() + ''
     return text
 
 def convert_text_to_docx(text, docx_path):
