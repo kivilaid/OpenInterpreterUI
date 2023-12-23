@@ -1,5 +1,13 @@
 import streamlit as st
 
+import sys
+
+# Clear the contents of log.txt and redirect stdout and stderr to log.txt
+with open('workspace/log.txt', 'w') as log_file:
+    sys.stdout = log_file
+    sys.stderr = log_file
+    print("Log file cleared and output redirected to log.txt")
+
 def home_page():
     st.title('Welcome to TravelSafe Insurance!')
     st.markdown("""
@@ -118,4 +126,10 @@ def main():
         st.subheader(f'Estimated insurance cost: ${cost}')
 
 if __name__ == "__main__":
+    # Clear log and redirect output before starting the app
+    with open('workspace/log.txt', 'w') as log_file:
+        pass  # This will clear the contents of log.txt
+    sys.stdout = open('workspace/log.txt', 'a')
+    sys.stderr = sys.stdout  # Redirect stderr to the same log file
+
     main()
