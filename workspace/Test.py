@@ -29,13 +29,15 @@ if menu_choice == 'Travel insurance':
         submit_button = st.form_submit_button('Calculate')
         if submit_button:
             st.write('Calculation would be performed here.')
-# Create a 3x3 grid for image placeholders
-for i in range(3):
-    cols = st.columns(3)
-    for col in cols:
-        # Randomly select an image of a huge car
-        random_car_image = random.choice(car_images)
-        col.image(random_car_image, caption='Huge Car')
+    if menu_choice == 'Gallery':
+        # Create a 3x3 grid for image placeholders
+        for i in range(3):
+            cols = st.columns(3)
+            for col in cols:
+                # Randomly select an image of a huge car
+                random_car_image = random.choice(car_images)
+                col.image(random_car_image, caption='Huge Car')
+
 
 if __name__ == '__main__':
     main()
