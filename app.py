@@ -14,7 +14,7 @@ from openai import Model
 
 set_style()
 
-st.title("💬 Open Interpreter")
+st.title("💬 Koodimurdja")
 
 init_session_states()
 
