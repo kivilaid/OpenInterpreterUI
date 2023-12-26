@@ -1,4 +1,4 @@
-streamlitimport streamlit as st
+import streamlit as st
 
 def create_upload_file():
     uploaded_file = st.file_uploader("Choose a file")
