@@ -1,0 +1,106 @@
+{
+    "Kindlustuspoliis": {
+        "Poliisi_nr": "3302926795",
+        "Kindlustusperiood": {
+            "Algus": "18.02.2023",
+            "Lõpp": "17.02.2026"
+        },
+        "Kindlustusmakse": {
+            "Kogusumma": "2348.64",
+            "Valuuta": "eurot",
+            "Maksegraafik": [
+                {
+                    "Tähtaeg": "20.02.2023",
+                    "Osamakse_suurus": "391.44"
+                },
+                {
+                    "Tähtaeg": "18.08.2023",
+                    "Osamakse_suurus": "391.44"
+                },
+                {
+                    "Tähtaeg": "19.02.2024",
+                    "Osamakse_suurus": "391.44"
+                },
+                {
+                    "Tähtaeg": "19.08.2024",
+                    "Osamakse_suurus": "391.44"
+                },
+                {
+                    "Tähtaeg": "18.02.2025",
+                    "Osamakse_suurus": "391.44"
+                },
+                {
+                    "Tähtaeg": "18.08.2025",
+                    "Osamakse_suurus": "391.44"
+                }
+            ]
+        },
+        "Kindlustusandja": {
+            "Nimi": "AB \"Lietuvos draudimas\" Eesti filiaal (PZU)",
+            "Registrikood": "12831829",
+            "Aadress": "Pärnu mnt 141, 11314 Tallinn",
+            "Telefon": "+372 622 4599",
+            "E-post": "info@pzu.ee"
+        },
+        "Kindlustusvõtja": {
+            "Nimi": "Ando Kivilaid",
+            "Isikukood": "37910030232",
+            "Aadress": "Merirahu 4-41, Tallinn, 13516 Harju",
+            "Telefon": "+372 622 4599",
+            "E-post": "ando@kivilaid.ee"
+        },
+        "Soodustatud_isikud": [
+            {
+                "Nimi": "AS LHV Pank",
+                "Märkus": "on hüpoteegipidaja",
+                "Registrikood": "10539549"
+            },
+            {
+                "Nimi": "Ando Kivilaid",
+                "Märkus": "ei ole hüpoteegipidaja",
+                "Isikukood": "37910030232"
+            }
+        ],
+        "Kindlustatud_ese": {
+            "Kirjeldus": "Hoone (Eluruum), Kodune vara",
+            "Aadress": "Kadaka puiestee 69, Tallinn, 10913 Harju maakond",
+            "Kindlustussumma": {
+                "Hoone": "50000.00",
+                "Kodune_vara": "3000.00",
+                "Kaasaskantav_kodune_vara": "4000.00",
+                "Väärisesemed": "0"
+            },
+            "Kindlustuskaitse": {
+                "Tulekahju": "jah",
+                "Veeavarii": "jah",
+                "Murdvargus": "jah",
+                "Vandalism": "jah",
+                "Torm": "jah",
+                "Üleujutus": "jah",
+                "Sadevesi_läbi_konstruktsiooni": "jah",
+                "Nutiseadme_lisakaitse": "ei",
+                "Kogurisk": "jah",
+                "Vastutuskindlustus": "jah",
+                "Ajutise_elukoha_üürikulu": "jah",
+                "Üürileandja_lisakaitse": "ei"
+            }
+        },
+        "Omavastutus": "200",
+        "Kindlustuslepingu_vahendaja": {
+            "Nimi": "PZU Kindlustus (veebipood)",
+            "Aadress": "Pärnu mnt 141, 11314 Tallinn",
+            "Registrikood": "12831829",
+            "Telefon": "+372 622 4599",
+            "E-post": "info@pzu.ee"
+        },
+        "Riskiasjaolud": {
+            "Alaline_elamine": "Jah",
+            "Hoone": {
+                "Ehitise_tüüp": "Tuldtakistav (sega)",
+                "Ehitusaasta": "1973",
+                "Renoveerimisaasta": "2013",
+                "Üldpind": "579"
+            }
+        }
+    }
+}

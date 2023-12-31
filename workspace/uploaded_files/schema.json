@@ -1,0 +1,1650 @@
+{
+  "type": "object",
+  "title": "Sports Memorabilia",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "language": "en",
+  "required": [
+    "policy",
+    "objects",
+    "customer",
+    "broker"
+  ],
+  "productTag": "Sports Memorabilia",
+  "properties": {
+    "binder": {
+      "type": "object",
+      "title": "Binder",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "number",
+          "title": "Binder"
+        }
+      }
+    },
+    "broker": {
+      "type": "object",
+      "title": "Quote",
+      "required": [
+        "shortName"
+      ],
+      "properties": {
+        "shortName": {
+          "type": "string",
+          "title": "Broker"
+        }
+      }
+    },
+    "packages": {
+      "type": "object",
+      "title": "Packages",
+      "description": "packages description"
+    },
+    "claims": {
+      "type": "object",
+      "title": "Claims",
+      "required": [
+        "anyClaims"
+      ],
+      "properties": {
+        "anyClaims": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "Have you made any claims on this address, or any other risk you are/were responsible for, in the last 5 years?",
+          "default": "No"
+        }
+      },
+      "dependencies": {
+        "anyClaims": {
+          "oneOf": [
+            {
+              "required": [],
+              "properties": {
+                "anyClaims": {
+                  "enum": [
+                    "Yes"
+                  ]
+                },
+                "insuredItem": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/claim-insuredItem"
+                  },
+                  "title": "Claim",
+                  "maxItems": 100,
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "anyClaims": {
+                  "enum": [
+                    "No"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "title": "Policy Information",
+      "required": [
+        "dateInception",
+        "dateExpiry",
+        "createdBy"
+      ],
+      "properties": {
+        "params": {
+          "type": "object",
+          "title": "",
+          "properties": {
+            "quoteNo": {
+              "type": "string",
+              "title": "Quote Number"
+            },
+            "productTag": {
+              "type": "string",
+              "title": "Product",
+              "default": "Sports Memorabilia",
+              "readOnly": true
+            }
+          }
+        },
+        "referralCode": {
+          "type": "string",
+          "title": "Referral Code"
+        },
+        "currency": {
+          "type": "string",
+          "title": "currency",
+          "default": "USD"
+        },
+        "policyNo": {
+          "type": "string",
+          "title": "Poliisi number"
+        },
+        "createdBy": {
+          "type": "string",
+          "title": "Created By"
+        },
+        "dateIssue": {
+          "type": "string",
+          "title": "Issue Date",
+          "format": "date"
+        },
+        "dateExpiry": {
+          "type": "string",
+          "title": "End Date",
+          "format": "date"
+        },
+        "financials": {
+          "$ref": "#/definitions/policy-financials"
+        },
+        "dateInception": {
+          "type": "string",
+          "title": "Start Date",
+          "format": "date"
+        }
+      }
+    },
+    "objects": {
+      "type": "object",
+      "title": "Objects",
+      "required": [],
+      "properties": {
+        "insuredItem": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/object-insuredItem"
+          },
+          "title": "Collection Address",
+          "maxItems": 1,
+          "minItems": 1
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "title": "Customer Information",
+      "required": [
+        "name",
+        "lastName"
+      ],
+      "properties": {
+        "id": {
+          "type": "number",
+          "title": "Technical ID",
+          "readOnly": true
+        },
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "default": "Code"
+        },
+        "name": {
+          "type": "string",
+          "title": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Last Name"
+        },
+        "collectorType": {
+          "enum": [
+            "Personal",
+            "Dealer"
+          ],
+          "type": "string",
+          "title": "Collector Type"
+        },
+        "birthDate": {
+          "type": "string",
+          "title": "Date of Birth",
+          "format": "date"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "title": "Phone Number"
+        },
+        "emailAddress": {
+          "type": "string",
+          "title": "Email Address"
+        },
+        "referralCode": {
+          "type": "string",
+          "title": "Referral Code"
+        },
+        "address": {
+          "$ref": "#/definitions/address-params"
+        },
+        "sanctionsSearch": {
+          "$ref": "#/definitions/sanctions-check-params"
+        }
+      },
+      "dependencies": {
+        "collectorType": {
+          "oneOf": [
+            {
+              "required": [
+                "deductible"
+              ],
+              "properties": {
+                "collectorType": {
+                  "enum": [
+                    "Personal"
+                  ]
+                },
+                "deductible": {
+                  "enum": [
+                    0,
+                    500,
+                    1000
+                  ],
+                  "type": "number",
+                  "title": "Deductible"
+                }
+              }
+            },
+            {
+              "required": [
+                "deductible"
+              ],
+              "properties": {
+                "collectorType": {
+                  "enum": [
+                    "Dealer"
+                  ]
+                },
+                "deductible": {
+                  "enum": [
+                    1000,
+                    2500,
+                    5000
+                  ],
+                  "type": "number",
+                  "title": "Deductible"
+                },
+                "businessName": {
+                  "type": "string",
+                  "title": "Business Name"
+                },
+                "companyWebsite": {
+                  "type": "string",
+                  "title": "Company Website"
+                },
+                "annualRevenue": {
+                  "type": "string",
+                  "title": "Estimated Annual Revenue"
+                },
+                "centralAlarm": {
+                  "type": "string",
+                  "title": "Location has central alarm:",
+                  "enum": [
+                    "Yes",
+                    "No"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "documents": {
+      "type": "object",
+      "title": "Dokumendid",
+      "required": [],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/document"
+          },
+          "title": "Attached documents",
+          "maxItems": 100,
+          "minItems": 0
+        }
+      }
+    },
+    "uploadedDocuments": {
+      "type": "object",
+      "title": "Uploaded documents and media",
+      "required": [],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/document"
+          },
+          "title": "Uploaded documents and media",
+          "maxItems": 100,
+          "minItems": 0
+        }
+      }
+    },
+    "schedules": {
+      "type": "object",
+      "title": "Maksegraafik",
+      "required": [
+        "payMonthFrequency"
+      ],
+      "properties": {
+        "payer": {
+          "enum": [
+            "partner",
+            "customer"
+          ],
+          "type": "string",
+          "title": "Maksja",
+          "default": "customer",
+          "readOnly": true
+        },
+        "dueDay": {
+          "type": "string",
+          "title": "Maksepäev igas kuus"
+        },
+        "paymentTerm": {
+          "type": "number",
+          "title": "Maksetähtaeg päevades",
+          "default": 14
+        },
+        "firstPayment": {
+          "type": "object",
+          "title": "Esimene makse",
+          "required": [],
+          "properties": {
+            "dueDate": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Esimese makse kuupäev",
+              "format": "date"
+            },
+            "sharePct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "title": "Esimese osamakse %"
+            }
+          }
+        },
+        "payMonthFrequency": {
+          "enum": [
+            0,
+            1
+          ],
+          "type": "number",
+          "title": "Payment frequency (pay each number of months)",
+          "default": 0,
+          "enumNames": [
+            "Single payment",
+            "Monthly"
+          ]
+        }
+      }
+    },
+    "endorsements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "Klausel",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "ID"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "Nimetus"
+          },
+          "text": {
+            "type": "string",
+            "title": "Klausli tekst",
+            "default": null
+          }
+        }
+      },
+      "title": "Klauslid",
+      "maxItems": 50,
+      "minItems": 0,
+      "required": []
+    },
+    "healthAndSafety": {
+      "type": "object",
+      "title": "Statement of Fact",
+      "required": [],
+      "properties": {
+        "insuredItems2": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/theBusiness"
+          },
+          "title": "Additional Information",
+          "maxItems": 1,
+          "minItems": 1
+        }
+      }
+    },
+    "referralComments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "Referrals",
+        "required": [
+          "user",
+          "time"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Comment"
+          },
+          "time": {
+            "type": "string",
+            "title": "Date/Time",
+            "format": "datetime"
+          },
+          "user": {
+            "type": "string",
+            "title": "Approver"
+          }
+        }
+      },
+      "title": "Referrals",
+      "maxItems": 50,
+      "minItems": 0,
+      "readOnly": true,
+      "required": []
+    }
+  },
+  "definitions": {
+    "file": {
+      "type": "object",
+      "properties": {
+        "mime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "extention",
+          "default": "application/pdf"
+        },
+        "content": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Single file",
+          "format": "data-url"
+        },
+        "filename": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "File name",
+          "default": "filename"
+        },
+        "createdAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "created at",
+          "format": "date"
+        },
+        "documentId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "documentId"
+        }
+      }
+    },
+    "document": {
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/file"
+        },
+        "fileUpload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": true
+        },
+        "documentType": {
+          "type": "string",
+          "default": "other"
+        },
+        "documentCategory": {
+          "type": "string",
+          "default": "other"
+        }
+      }
+    },
+    "risk-params": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "sanctionChecked": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "Sanction Checked Flag",
+          "default": "Yes"
+        },
+        "terrorismExclusion": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "Terrorism Exclusion Flag",
+          "default": "Yes"
+        }
+      }
+    },
+    "address-params": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Zip Code"
+        },
+        "appartmentNumber": {
+          "type": "string",
+          "title": "Appartment Number"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        }
+      }
+    },
+    "document-types": {
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "quote",
+          "title": "Kindlustustoote pakkumus"
+        },
+        {
+          "const": "other",
+          "title": "Täiendav dokument"
+        },
+        {
+          "const": "policy",
+          "title": "Kindlustustoote poliis"
+        }
+      ],
+      "title": "dokumendid",
+      "default": "other"
+    },
+    "iaddress-params": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Interested party Zip Code"
+        },
+        "appartmentNumber": {
+          "type": "string",
+          "title": "Appartment Number"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        }
+      }
+    },
+    "raddress-params": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Risk Zip Code"
+        },
+        "appartmentNumber": {
+          "type": "string",
+          "title": "Appartment Number"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        },
+        "county2": {
+          "type": "string",
+          "title": "County"
+        },
+        "locationType": {
+          "type": "string",
+          "title": "Location Type:",
+          "enum": [
+            "Single Home",
+            "Appartment/Condo",
+            "Self Storage",
+            "Other"
+          ]
+        },
+        "coverageValue": {
+          "type": "string",
+          "title": "Estimated Coverage Value"
+        },
+        "valuedOverItems": {
+          "type": "string",
+          "title": "Number of collection items valued over $5,000"
+        },
+        "dEffectiveDate": {
+          "type": "string",
+          "title": "Desired Effective Date",
+          "format": "date"
+        },
+        "surplusLicense": {
+          "type": "string",
+          "title": "Surplus Line Broker License Number"
+        }
+      },
+      "dependencies": {
+        "locationType": {
+          "oneOf": [
+            {
+              "required": [],
+              "properties": {
+                "locationType": {
+                  "enum": [
+                    "Other"
+                  ]
+                },
+                "primaryLocationDescription": {
+                  "type": "string",
+                  "title": "Primary location type description:"
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "locationType": {
+                  "enum": [
+                    "Single Home",
+                    "Appartment/Condo",
+                    "Self Storage"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "addAddress-params": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Risk Zip Code"
+        },
+        "appartmentNumber": {
+          "type": "string",
+          "title": "Appartment Number"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        },
+        "county2": {
+          "type": "string",
+          "title": "County"
+        }
+      }
+    },
+    "risk-financials": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "insurers",
+        "premium"
+      ],
+      "properties": {
+        "premium": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Premium",
+          "default": 0
+        },
+        "insurers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "insurer"
+            ],
+            "properties": {
+              "isLead": {
+                "type": "boolean",
+                "title": "Is lead insurer",
+                "default": false
+              },
+              "commPct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "title": "Broker commission %"
+              },
+              "insurer": {
+                "type": "string"
+              },
+              "grossCommPct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "title": "Gross commission %"
+              },
+              "premiumSharePct": {
+                "type": "number",
+                "title": "Premium share"
+              }
+            }
+          },
+          "title": "Commissions",
+          "maxItems": 1,
+          "minItems": 1
+        },
+        "surplusPct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Surplus tax"
+        },
+        "stampFeePct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Stamping fee"
+        },
+        "fireMarshalPct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Fire Marshal tax"
+        }
+      }
+    },
+    "claim-insuredItem": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/claim-insuredItems-params"
+        }
+      }
+    },
+    "policy-financials": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "adminFeeSum": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Administration fee",
+          "format": "number",
+          "default": 10
+        },
+        "installmentFeeSum": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Monthly fee",
+          "format": "number",
+          "default": 0
+        },
+        "adminFeeIncludeTaxes": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Policy fee"
+        }
+      }
+    },
+    "object-insuredItem": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/object-insuredItems-params"
+        },
+        "include": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "INCLUDE",
+          "default": true
+        },
+        "onCover": {
+          "type": "boolean",
+          "title": "ON COVER",
+          "default": false
+        },
+        "products": {
+          "type": "object",
+          "title": "Products",
+          "properties": {
+            "sportsMemorabilia": {
+              "$ref": "#/definitions/product-sportsMemorabilia"
+            }
+          }
+        }
+      }
+    },
+    "address-params-risk": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Risk Zip Code"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        }
+      }
+    },
+    "claimAddress-params": {
+      "type": "object",
+      "title": "Address",
+      "required": [
+        "zip"
+      ],
+      "properties": {
+        "zip": {
+          "type": "string",
+          "title": "Claim Zip Code"
+        },
+        "city": {
+          "type": "string",
+          "title": "City"
+        },
+        "county": {
+          "type": "string",
+          "title": "State"
+        },
+        "street": {
+          "type": "string",
+          "title": "Street name"
+        },
+        "country": {
+          "type": "string",
+          "title": "Country"
+        }
+      }
+    },
+    "object-valued-items": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/object-valued-items-params"
+        }
+      }
+    },
+    "risk-financials-null": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "insurers",
+        "premium"
+      ],
+      "properties": {
+        "premium": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Premium",
+          "default": 0
+        },
+        "insurers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "insurer"
+            ],
+            "properties": {
+              "isLead": {
+                "type": "boolean",
+                "title": "Is lead insurer",
+                "default": false
+              },
+              "commPct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "title": "Comission"
+              },
+              "insurer": {
+                "type": "string"
+              },
+              "grossCommPct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "title": "Gross CommPct %"
+              },
+              "premiumSharePct": {
+                "type": "number",
+                "title": "Premium share"
+              }
+            }
+          },
+          "title": "Commissions",
+          "maxItems": 1,
+          "minItems": 1
+        },
+        "surplusPct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Surplus tax"
+        },
+        "stampFeePct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Stamping fee"
+        },
+        "fireMarshalPct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Fire Marshal tax"
+        }
+      }
+    },
+    "claim-insuredItems-params": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "claimDate",
+        "claimAmount",
+        "type",
+        "commentAction"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "Accidental Damage",
+            "Attempted Theft",
+            "Sports Memorabilia",
+            "Deterioration of Stock",
+            "Employers Liability",
+            "Escape of Water",
+            "Fire",
+            "Flood",
+            "Glass",
+            "Glass Breakage",
+            "Goods in Transit",
+            "Impact Damage",
+            "Legal Expenses",
+            "Material Damage",
+            "Miscellaneous",
+            "Other",
+            "Product Liability",
+            "Public Liability",
+            "Storm",
+            "Theft",
+            "Vandalism"
+          ],
+          "type": "string",
+          "title": "Type"
+        },
+        "iaddress": {
+          "$ref": "#/definitions/claimAddress-params"
+        },
+        "firstName": {
+          "type": "string",
+          "title": "First Name"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Last Name"
+        },
+        "phone": {
+          "type": "string",
+          "title": "Phone Number"
+        },
+        "email": {
+          "type": "string",
+          "title": "E-mail address"
+        },
+        "claimDate": {
+          "type": "string",
+          "title": "Date",
+          "format": "date"
+        },
+        "claimAmount": {
+          "type": "number",
+          "title": "Claim amount"
+        },
+        "commentAction": {
+          "type": "string",
+          "title": "Items effected description:"
+        },
+        "affectedHigh": {
+          "type": "string",
+          "title": "Effected high value items"
+        }
+      },
+      "dependencies": {
+        "type": {
+          "oneOf": [
+            {
+              "required": [],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "Theft"
+                  ]
+                },
+                "policeReportNumber": {
+                  "type": "string",
+                  "title": "Police Report Number"
+                },
+                "fileNumber": {
+                  "type": "string",
+                  "title": "File Number"
+                },
+                "departmentName": {
+                  "type": "string",
+                  "title": "Department Name"
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "Other"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "title": "Description"
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "Accidental Damage",
+                    "Attempted Theft",
+                    "Sports Memorabilia",
+                    "Deterioration of Stock",
+                    "Employers Liability",
+                    "Escape of Water",
+                    "Fire",
+                    "Flood",
+                    "Glass",
+                    "Glass Breakage",
+                    "Goods in Transit",
+                    "Impact Damage",
+                    "Legal Expenses",
+                    "Material Damage",
+                    "Miscellaneous",
+                    "Product Liability",
+                    "Public Liability",
+                    "Storm",
+                    "Vandalism"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "object-insuredItems-params": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Collection Address",
+          "default": "Collection Address"
+        },
+        "address": {
+          "$ref": "#/definitions/raddress-params"
+        },
+        "addtionalAddress": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1,
+          "title": "Additional Address",
+          "items": {
+            "type": "object",
+            "properties": {
+              "additionalAddress": {
+                "$ref": "#/definitions/addAddress-params"
+              },
+              "locationType": {
+                "type": "string",
+                "title": "Location Type:",
+                "enum": [
+                  "Single Home",
+                  "Appartment/Condo",
+                  "Self Storage",
+                  "Other"
+                ]
+              },
+              "earthquake": {
+                "type": "string",
+                "title": "Earthquake"
+              },
+              "flood": {
+                "type": "string",
+                "title": "Flood"
+              },
+              "protectionClass": {
+                "type": "string",
+                "title": "Protection Class"
+              },
+              "hurricane": {
+                "type": "string",
+                "title": "Hurricane"
+              },
+              "tornado": {
+                "type": "string",
+                "title": "Tornado"
+              },
+              "wildfire": {
+                "type": "string",
+                "title": "Wildfire"
+              },
+              "crime": {
+                "type": "string",
+                "title": "Crime score"
+              },
+              "multilocation": {
+                "type": "string",
+                "default": "Yes",
+                "title": "Multi Location"
+              }
+            },
+            "dependencies": {
+              "locationType": {
+                "oneOf": [
+                  {
+                    "required": [],
+                    "properties": {
+                      "locationType": {
+                        "enum": [
+                          "Other"
+                        ]
+                      },
+                      "primaryLocationDescription": {
+                        "type": "string",
+                        "title": "Primary location type description:"
+                      }
+                    }
+                  },
+                  {
+                    "required": [],
+                    "properties": {
+                      "locationType": {
+                        "enum": [
+                          "Single Home",
+                          "Appartment/Condo",
+                          "Self Storage"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "valuedItems": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/object-valued-items"
+          },
+          "title": "High Value Item",
+          "maxItems": 100,
+          "minItems": 0
+        },
+        "protectionClass": {
+          "type": "string",
+          "title": "Protection Class"
+        },
+        "vaultDiscount": {
+          "enum": [
+            "Applied",
+            "Not Applied"
+          ],
+          "type": "string",
+          "title": "Vault Discount",
+          "default": "Not Applied"
+        },
+        "unscheduled": {
+          "type": "number",
+          "title": "Unscheduled Single Item Limit"
+        },
+        "shipping": {
+          "type": "number",
+          "title": "Shipping Limit Per Mailing"
+        },
+        "earthquake": {
+          "type": "string",
+          "title": "Earthquake"
+        },
+        "flood": {
+          "type": "string",
+          "title": "Flood"
+        },
+        "hurricane": {
+          "type": "string",
+          "title": "Hurricane"
+        },
+        "tornado": {
+          "type": "string",
+          "title": "Tornado"
+        },
+        "wildfire": {
+          "type": "string",
+          "title": "Wildfire"
+        },
+        "crime": {
+          "type": "string",
+          "title": "Crime score"
+        }
+      }
+    },
+    "object-valued-items-params": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "title": "Item Name"
+        },
+        "itemType": {
+          "type": "string",
+          "title": "Item Type"
+        },
+        "estimatedValue": {
+          "type": "number",
+          "title": "Estimated Value"
+        },
+        "itemDescription": {
+          "type": "string",
+          "title": "Item Description"
+        },
+        "authenticator": {
+          "type": "string",
+          "title": "Authenticator"
+        },
+        "authenticatorDescription": {
+          "type": "string",
+          "title": "Description for Authenticator"
+        },
+        "serialNumber": {
+          "type": "string",
+          "title": "Serial Number"
+        },
+        "documents": {
+          "type": "object",
+          "title": "Dokumendid",
+          "required": [],
+          "properties": {
+            "documents": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/document"
+              },
+              "title": "Attached documents",
+              "maxItems": 100,
+              "minItems": 0
+            }
+          }
+        }
+      }
+    },
+    "product-sportsMemorabilia": {
+      "type": "object",
+      "title": "",
+      "properties": {
+        "include": {
+          "enum": [
+            true,
+            false,
+            null
+          ],
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Sports Memorabilia",
+          "default": true,
+          "readOnly": true,
+          "productTag": "Sports Memorabilia"
+        },
+        "onCover": {
+          "type": "boolean",
+          "title": "ON COVER",
+          "default": false
+        }
+      },
+      "dependencies": {
+        "include": {
+          "oneOf": [
+            {
+              "required": [],
+              "properties": {
+                "data": {
+                  "$ref": "#/definitions/product-sportsMemorabilia-data"
+                },
+                "include": {
+                  "enum": [
+                    true
+                  ]
+                },
+                "financials": {
+                  "$ref": "#/definitions/risk-financials"
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "include": {
+                  "enum": [
+                    false
+                  ]
+                }
+              }
+            },
+            {
+              "required": [],
+              "properties": {
+                "data": {
+                  "$ref": "#/definitions/product-sportsMemorabilia-data"
+                },
+                "include": {
+                  "enum": [
+                    null
+                  ]
+                },
+                "financials": {
+                  "$ref": "#/definitions/risk-financials-null"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "theBusiness": {
+      "type": "object",
+      "title": "",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/theBusiness-params"
+        }
+      }
+    },
+    "theBusiness-params": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Additional Information",
+          "defualt": "Additional Information"
+        },
+        "filedBankruptcy": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "Have you filed for bankruptcy, entered into foreclosure or had a lien, judgement or repossession in the last 5 years?"
+        },
+        "propertyClaim": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "HHave you filed a personal property insurance claim in the last 5 years?"
+        },
+        "convictedFelony": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "title": "Have you been convicted of crime, misdemeanor or felony in the last 5 years?"
+        },
+        "dealer": {
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "type": "string",
+          "description": "You qualify as a dealer if any of the following apply: A. You are a member of trade societies or associations where membership is dependent upon your commercial (dealer) status;  B. You own (or are listed as a dealer in) a website dedicated to the buying and selling of collectibles; C. You derive your primary income from the trading and selling of collectibles;  D. Your customers buy and sell goods from you in accordance with your “Terms of Trade” conditions",
+          "title": "Are you a dealer and the goods you are insuring are your dealing stock?"
+        }
+      }
+    },
+    "product-sportsMemorabilia-data": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Product name",
+          "default": "Sports Memorabilia"
+        },
+        "limit": {
+          "enum": [
+            "25000",
+            "50000",
+            "75000",
+            "100000",
+            "200000",
+            "300000",
+            "400000",
+            "500000",
+            "600000",
+            "700000",
+            "800000",
+            "900000",
+            "1000000",
+            "2000000",
+            "3000000",
+            "4000000",
+            "5000000"
+          ],
+          "type": "string",
+          "title": "Limit"
+        }
+      }
+    },
+    "sanctions-check-params": {
+      "type": "object",
+      "title": "",
+      "required": [],
+      "properties": {
+        "relatedSearchLink": {
+          "type": "string",
+          "title": "Search link"
+        },
+        "sanctionsCheckStatus": {
+          "enum": [
+            "notChecked",
+            "underSanctions",
+            "falsePositive",
+            "noMatch"
+          ],
+          "type": "string",
+          "title": "Sanctions Search Status",
+          "default": "notChecked",
+          "enumNames": [
+            "Not Checked",
+            "Under sanctions",
+            "Match to resolve",
+            "No match found"
+          ]
+        }
+      }
+    }
+  },
+  "excelCalculator": "ledger_7a91n4ew1z6lefmh"
+}

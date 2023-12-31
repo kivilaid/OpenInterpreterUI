@@ -85,7 +85,7 @@ def set_open_ai_server_credentials():
 def set_open_router_server_credentials():
     with st.expander(label="Settings", expanded=(not st.session_state['chat_ready'])):
         openrouter_key = st.text_input('Open Router Key:', type="password")
-        openrouter_api_base = "https://openrouter.ai/api/v1/chat/completions"
+        openrouter_api_base = "https://op200enrouter.ai/api/v1/chat/completions"
         openrouter_headers = {
             "HTTP-Referer": "http://localhost:3000", # To identify your app. Can be set to e.g. http://localhost:3000 for testing
             "X-Title": "Open-Interpreter Gpt App", # Optional. Shows on openrouter.ai
@@ -100,7 +100,7 @@ def set_open_router_server_credentials():
         context_window = st.session_state['models']['openrouter'][model]['context_window']
 
         temperature = st.slider('🌡 Tempeture', min_value=0.01, max_value=1.0, value=st.session_state.get('temperature', 0.5), step=0.01)
-        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=2000, value=st.session_state.get('max_tokens', 512), step=1)
+        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=16000, value=st.session_state.get('max_tokens', 8000), step=1)
 
         num_pair_messages_recall = st.slider('**Memory Size**: user-assistant message pairs', min_value=1, max_value=10, value=5)
         
