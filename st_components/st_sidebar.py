@@ -3,6 +3,7 @@ import streamlit as st
 from streamlit.components.v1 import html
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
+import os
 
 from st_components.st_conversations import conversation_navigation
 
@@ -12,15 +13,15 @@ def st_sidebar():
     # try:
         with st.sidebar:
             # Select choice of API Server
-            api_server = st.radio('Your API Server',['OpenAI','Open Router','OpenAI Mock'],horizontal=True)
-            
+            # api_server = st.radio('Your API Server',['OpenAI','Open Router','OpenAI Mock'],horizontal=True, index=0)
+            api_server = 'OpenAI'
             # Set credentials based on choice of API Server
             if api_server == 'OpenAI':
                 set_open_ai_server_credentials()
             elif api_server == 'Open Router':
                 set_open_router_server_credentials()
-            elif api_server == "OpenAI Mock":
-                st.warning('under construction')
+            # elif api_server == "OpenAI Mock":
+                # st.warning('under construction')
 
             # Section dedicated to navigate conversations
             conversation_navigation()
@@ -49,8 +50,10 @@ def about_us():
 
 def set_open_ai_server_credentials():
     with st.expander(label="Settings", expanded= (not st.session_state['chat_ready'])):
-        openai_key = st.text_input('OpenAI Key:', type="password")
-        os.environ['OPENAI_API_KEY '] = openai_key
+        # openai_key = st.text_input('OpenAI Key:', type="password")
+        # os.environ['OPENAI_API_KEY '] = openai_key
+        openai_key = os.environ.get('OPENAI_API_KEY', None)
+
         model = st.selectbox(
             label= '🔌 models', 
             options= list(st.session_state['models']['openai'].keys()), 
@@ -60,7 +63,7 @@ def set_open_ai_server_credentials():
         context_window = st.session_state['models']['openai'][model]['context_window']
 
         temperature = st.slider('🌡 Tempeture', min_value=0.01, max_value=1.0, value=st.session_state.get('temperature', 0.5), step=0.01)
-        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=2000, value=st.session_state.get('max_tokens', 512), step=1)
+        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=16000, value=st.session_state.get('max_tokens', 512), step=1)
 
         num_pair_messages_recall = st.slider('**Memory Size**: user-assistant message pairs', min_value=1, max_value=10, value=5)
 
