@@ -138,3 +138,4 @@ win32-setctime==1.1.0
 yarl==1.9.2
 yaspin==3.0.1
 zipp==3.17.0
+pandas==2.1.1

@@ -9,8 +9,8 @@
         "gpt-4": {
             "context_window": 8192
         },
-        "gpt-4-32k": {
-            "context_window": 32768
+        "gpt-4-1106-preview": {
+            "context_window": 128000
         }
     },
     "openrouter": {

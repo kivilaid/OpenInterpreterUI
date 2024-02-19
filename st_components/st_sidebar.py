@@ -3,6 +3,7 @@ import streamlit as st
 from streamlit.components.v1 import html
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
+import os
 
 from st_components.st_conversations import conversation_navigation
 
@@ -18,8 +19,8 @@ def st_sidebar():
     # try:
         with st.sidebar:
             # Select choice of API Server
-            api_server = st.selectbox('Your API Server', [OPEN_AI, AZURE_OPEN_AI, OPEN_ROUTER, OPEN_AI_MOCK])
-
+            # api_server = st.radio('Your API Server',['OpenAI','Open Router','OpenAI Mock'],horizontal=True, index=0)
+            api_server = 'OpenAI'
             # Set credentials based on choice of API Server
             if api_server == OPEN_AI:
                 set_open_ai_server_credentials()
@@ -27,14 +28,14 @@ def st_sidebar():
                 set_azure_open_ai_server_credentials()
             elif api_server == OPEN_ROUTER:
                 set_open_router_server_credentials()
-            elif api_server == OPEN_AI_MOCK:
-                st.warning('under construction')
+            # elif api_server == "OpenAI Mock":
+                # st.warning('under construction')
 
             # Section dedicated to navigate conversations
             conversation_navigation()
 
             # Section dedicated to About Us
-            about_us()
+            #about_us()
 
 
     # except Exception as e:
@@ -57,8 +58,10 @@ def about_us():
 
 def set_open_ai_server_credentials():
     with st.expander(label="Settings", expanded= (not st.session_state['chat_ready'])):
-        openai_key = st.text_input('OpenAI Key:', type="password")
-        os.environ['OPENAI_API_KEY '] = openai_key
+        # openai_key = st.text_input('OpenAI Key:', type="password")
+        # os.environ['OPENAI_API_KEY '] = openai_key
+        openai_key = os.environ.get('OPENAI_API_KEY', None)
+
         model = st.selectbox(
             label= '🔌 models',
             options= list(st.session_state['models']['openai'].keys()),
@@ -68,7 +71,7 @@ def set_open_ai_server_credentials():
         context_window = st.session_state['models']['openai'][model]['context_window']
 
         temperature = st.slider('🌡 Tempeture', min_value=0.01, max_value=1.0, value=st.session_state.get('temperature', 0.5), step=0.01)
-        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=2000, value=st.session_state.get('max_tokens', 512), step=1)
+        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=16000, value=st.session_state.get('max_tokens', 512), step=1)
 
         num_pair_messages_recall = st.slider('**Memory Size**: user-assistant message pairs', min_value=1, max_value=10, value=5)
 
@@ -131,7 +134,7 @@ def set_azure_open_ai_server_credentials():
 def set_open_router_server_credentials():
     with st.expander(label="Settings", expanded=(not st.session_state['chat_ready'])):
         openrouter_key = st.text_input('Open Router Key:', type="password")
-        openrouter_api_base = "https://openrouter.ai/api/v1/chat/completions"
+        openrouter_api_base = "https://op200enrouter.ai/api/v1/chat/completions"
         openrouter_headers = {
             "HTTP-Referer": "http://localhost:3000", # To identify your app. Can be set to e.g. http://localhost:3000 for testing
             "X-Title": "Open-Interpreter Gpt App", # Optional. Shows on openrouter.ai
@@ -146,7 +149,7 @@ def set_open_router_server_credentials():
         context_window = st.session_state['models']['openrouter'][model]['context_window']
 
         temperature = st.slider('🌡 Tempeture', min_value=0.01, max_value=1.0, value=st.session_state.get('temperature', 0.5), step=0.01)
-        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=2000, value=st.session_state.get('max_tokens', 512), step=1)
+        max_tokens = st.slider('📝 Max tokens', min_value=1, max_value=16000, value=st.session_state.get('max_tokens', 8000), step=1)
 
         num_pair_messages_recall = st.slider('**Memory Size**: user-assistant message pairs', min_value=1, max_value=10, value=5)
 

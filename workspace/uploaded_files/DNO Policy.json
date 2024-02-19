@@ -1,0 +1,79 @@
+{
+    "Management Liability Insurance": {
+        "Policy": {
+            "Policy_no": "RPXDK10.000099",
+            "Policy_Issuance_Date": "21.08.2023",
+            "Insured": {
+                "Name": "Docs Name",
+                "Address": "Rigas",
+                "Postal_Code_City": "234 Riga",
+                "Country": "Lv"
+            },
+            "Policy_Period": {
+                "Inception_Date": "22.08.2023",
+                "Expiry_Date": "21.08.2024",
+                "Continuity_Date": "31.08.2023",
+                "Policy_Amendment_Date": "N/A",
+                "Note": "The Policy Period begins at 00:01 and end at 24:00 standard time at the Policy Holder's address."
+            },
+            "Premium_Taxes": {
+                "Annual_Premium": "NOK 24,412.77",
+                "Insurance_Premium_Tax": "NOK 2,929.53"
+            },
+            "Limits_Deductibles": {
+                "Limit_of_Liability": "NOK 10,000,000.00",
+                "Defense_Costs_Limit": "10% in addition to Limit in the annual aggregate.",
+                "Retention_for_Individuals": "NOK 200,000.00",
+                "Indemnifiable_Loss": {
+                    "ROW": "NOK 567 per claim",
+                    "USA": "NOK 89 per claim"
+                },
+                "Entity_Security_Claims": {
+                    "USA": "NOK 235 per claim",
+                    "ROW": "NOK 398 per claim"
+                }
+            },
+            "Extended_Reporting_Period": {
+                "Due_to_Non_Renewal_of_Policy": {
+                    "12_months": "125% of Annual Premium",
+                    "24_months": "100% of Annual Premium",
+                    "36_months": "75% of Annual Premium"
+                },
+                "Due_to_Bankruptcy": {
+                    "12_months": "100% of Annual Premium",
+                    "24_months": "175% of Annual Premium",
+                    "36_months": "125% of Annual Premium"
+                },
+                "Due_to_Change_of_Control": {
+                    "12_months": "100% of Annual Premium",
+                    "24_months": "150% of Annual Premium",
+                    "36_months": "175% of Annual Premium"
+                },
+                "For_Previous_Management": "72 months for 0% of the Annual Premium"
+            },
+            "Conditions": {
+                "Wordings": "This policy is subject to the wordings attached as well as any special Conditions that may be included below.",
+                "Special_Conditions": "None"
+            },
+            "Geographic_Scope": "Worldwide, Excl. USA/Canada",
+            "Insurer": {
+                "Name": "Antares",
+                "Identifier": "123456",
+                "Coverage_Percentage": "100%"
+            },
+            "Underwriting_Agent": {
+                "Name": "RiskPoint A/S",
+                "Address": "Hammerensgade 4, 1267 København K",
+                "E-mail_contacts": {
+                    "Claims": "Claims@RiskPoint.eu",
+                    "Policy_issues": "underwriters@riskpoint.eu"
+                }
+            },
+            "Intermediary": "Test Broker",
+            "Appendices": {
+                "Appendix_1": "Policy wordings",
+                "Appendix_2": "Insurance Product Information Document"
+            }
+        }
+    }
+}

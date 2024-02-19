@@ -1,0 +1,27 @@
+{
+    "Acquinex GmbH": {
+        "UK Branch": {
+            "EstablishmentNumber": "{d.establishmentNumberUK}",
+            "Address": "{d.addressUK}",
+            "RegulatoryAuthority": "{d.regulatoryAuthorityUK}"
+        },
+        "Germany Head Office": {
+            "Address": "Kaiserhofstr. 10, 60313 Frankfurt am Main, Germany",
+            "CommercialRegister": "{d.commercialRegisterGermany}",
+            "AgencyType": "{d.agencyTypeGermany}",
+            "IndustrialCodeSection": "{d.industrialCodeSectionGermany}",
+            "ChamberOfCommerceAndIndustry": "Frankfurt am Main"
+        },
+        "IntermediaryRegister": {
+            "URL": "www.vermittlerregister.info",
+            "RegisterNumber": "{d.intermediaryRegisterNumber}"
+        },
+        "InsuranceCapacity": {
+            "PanelOfInsurers": "Details in Acquinex Terms and Conditions",
+            "ClaimsHandling": {
+                "ManagedInternally": true,
+                "SettlementAuthority": "Delegated to lead insurer"
+            }
+        }
+    }
+}
