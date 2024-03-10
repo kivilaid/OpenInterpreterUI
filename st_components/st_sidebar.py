@@ -7,8 +7,6 @@ import os
 
 from st_components.st_conversations import conversation_navigation
 
-import os 
-
 def st_sidebar():
     # try:
         with st.sidebar:
